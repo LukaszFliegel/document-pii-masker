@@ -37,8 +37,13 @@ def main(argv: list[str] | None = None) -> int:
 
     nlp = None
     if args.ner:
-        import spacy
-        nlp = spacy.load(args.ner)
+        try:
+            import spacy
+            nlp = spacy.load(args.ner)
+        except (ImportError, OSError):
+            print(f"error: --ner needs spaCy and the '{args.ner}' model. Install with:\n"
+                  f"  pip install -e .[ner]\n  python -m spacy download {args.ner}")
+            return 2
 
     if args.out_dir:
         args.out_dir.mkdir(parents=True, exist_ok=True)
