@@ -1,0 +1,18 @@
+# Copy to dictionary.toml (git-ignored!) and fill in your own data.
+# Key   = placeholder label written into the PDF -> [LABEL]. Label must be ASCII (A-Z, 0-9, _),
+#         because the placeholder font has no Polish glyphs. Terms (values) may use any characters.
+# Value = list of terms. Matching is case-insensitive, whitespace/line breaks are flexible.
+# "*" matches any word ending, which handles Polish inflection:
+#   "Jan* Kowalsk*" -> Jan Kowalski, Jana Kowalskiego, Janowi Kowalskiemu (but also Janusz Kowalski).
+# Dictionary entries win over automatic detection, so the same entity gets the same
+# label in every document - this is what makes the masked documents useful for RAG.
+
+FIRMA = ["Kowalski i Synowie Sp. z o.o.", "Kowalski i Synowie"]
+NIP_FIRMY = ["526-104-08-28", "5261040828"]
+WLASCICIEL = ["Jan* Kowalsk*"]
+WSPOLNIK = ["Łukasz* Żółkiewsk*"]
+ADRES_FIRMY = ["ul. Kwiatowa 5", "Kwiatow* 5"]
+KLIENT_NOWAK = ["Nowak Trans", "Piotr* Nowak*"]
+
+# Never mask these (e.g. false positives from --ner).
+ALLOW = ["Kodeks Cywilny"]

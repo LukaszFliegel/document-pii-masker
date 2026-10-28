@@ -1,0 +1,20 @@
+[project]
+name = "document-pii-masker"
+version = "0.1.0"
+description = "Mask PII (mostly Polish) in PDF documents before feeding them to a RAG system."
+requires-python = ">=3.11"
+dependencies = ["pymupdf>=1.24.3"]
+
+[project.optional-dependencies]
+ner = ["spacy>=3.7"]
+dev = ["pytest"]
+
+[project.scripts]
+masker = "masker.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["masker"]
